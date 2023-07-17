@@ -1,5 +1,5 @@
-# ifndef SCAN_TO_PCL_ROS_HPP
-# define SCAN_TO_PCL_ROS_HPP
+#ifndef SCAN_TO_PCL_ROS_HPP
+#define SCAN_TO_PCL_ROS_HPP
 
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
