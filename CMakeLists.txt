@@ -30,10 +30,10 @@ catkin_package(
 ## Specify additional locations of header files
 include_directories(include ${catkin_INCLUDE_DIRS})
 ## Declare a C++ library
-add_library(scan_to_pcl src/scan_to_pcl.cpp)
+add_library(${PROJECT_NAME} src/scan_to_pcl.cpp)
 ## Declare a C++ executable
-add_executable(scan_to_pcl_node src/scan_to_pcl_node.cpp)
+add_executable(${PROJECT_NAME}_node src/scan_to_pcl_node.cpp)
 ## Add cmake target dependencies of the executable
-add_dependencies(scan_to_pcl_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 ## Specify libraries to link a library or executable target against
-target_link_libraries(scan_to_pcl_node scan_to_pcl ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME}_node ${PROJECT_NAME} ${catkin_LIBRARIES})

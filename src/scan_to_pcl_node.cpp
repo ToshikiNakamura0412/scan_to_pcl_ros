@@ -1,4 +1,4 @@
-#include "scan_to_pcl.hpp"
+#include "scan_to_pcl_ros/scan_to_pcl.hpp"
 
 int main(int argc, char **argv)
 {
