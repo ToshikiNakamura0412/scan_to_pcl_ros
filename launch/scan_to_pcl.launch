@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <!-- config file path  -->
-    <arg name="rviz_settings" default="$(find scan_to_pcl_ros)/config/rviz.rviz"/>
+    <arg name="rviz_settings" default="$(find scan_to_pcl_ros)/config/test.rviz"/>
 
     <!-- node launch -->
     <node pkg="scan_to_pcl_ros" type="scan_to_pcl_node" name="scan_to_pcl_node" output="screen">
