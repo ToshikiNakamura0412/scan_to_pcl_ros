@@ -17,6 +17,7 @@ private:
     void hokuyo_callback(const sensor_msgs::LaserScan::ConstPtr& msg);
 
     int hz_;
+    std::string frame_id_;
     ros::NodeHandle nh_;
     ros::NodeHandle private_nh_;
     ros::Subscriber hokuyo_sub_;
