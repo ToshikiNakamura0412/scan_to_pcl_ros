@@ -7,5 +7,5 @@
     <node pkg="scan_to_pcl_ros" type="scan_to_pcl" name="scan_to_pcl" output="screen">
         <!-- <remap from="/scan" to="/<robot_name>/scan"/> -->
     </node>
-    <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_settings)"/> -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_settings)"/>
 </launch>
