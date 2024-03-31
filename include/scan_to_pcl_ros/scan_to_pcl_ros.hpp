@@ -1,27 +1,28 @@
 #ifndef SCAN_TO_PCL_ROS_HPP
 #define SCAN_TO_PCL_ROS_HPP
 
-#include <ros/ros.h>
-#include <sensor_msgs/LaserScan.h>
-#include <sensor_msgs/PointCloud2.h>
-#include <pcl_ros/point_cloud.h>
-#include <pcl_conversions/pcl_conversions.h>
-#include <laser_geometry/laser_geometry.h>
+#include <chrono>
+#include <functional>
+#include <memory>
 
-class ScanToPcl
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/laser_scan.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
+
+#include <laser_geometry/laser_geometry.hpp>
+
+
+class ScanToPcl : public rclcpp::Node
 {
 public:
     ScanToPcl();
-    void process();
-private:
-    void hokuyo_callback(const sensor_msgs::LaserScan::ConstPtr& msg);
 
-    int hz_;
+private:
+    void hokuyo_callback(sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg);
+
     std::string frame_id_;
-    ros::NodeHandle nh_;
-    ros::NodeHandle private_nh_;
-    ros::Subscriber hokuyo_sub_;
-    ros::Publisher  pcl_from_scan_pub_;
+    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr hokuyo_sub_;
+    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pcl_from_scan_pub_;
 };
 
 #endif
