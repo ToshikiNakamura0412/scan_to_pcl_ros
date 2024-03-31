@@ -1,0 +1,10 @@
+<launch>
+    <!-- config file path  -->
+    <arg name="rviz_config_path" default="$(find-pkg-share scan_to_pcl_ros)/config/rviz.rviz"/>
+
+    <!-- node launch -->
+    <node pkg="scan_to_pcl_ros" exec="scan_to_pcl_ros_node" name="scan_to_pcl_ros_node">
+        <!-- <remap from="/scan" to="/robot_name/scan"/> -->
+    </node>
+    <node pkg="rviz2" exec="rviz2" name="rviz2" args="-d $(var rviz_config_path)"/>
+</launch>
