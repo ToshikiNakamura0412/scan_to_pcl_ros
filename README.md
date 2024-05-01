@@ -1,4 +1,7 @@
 # scan_to_pcl_ros
+
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 ROS package for converting scan to pcl
 ## Environment
 - Ubuntu 20.04
