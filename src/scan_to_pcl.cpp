@@ -1,34 +1,41 @@
-#include "scan_to_pcl_ros/scan_to_pcl_ros.hpp"
+/**
+ * @file scan_to_pcl.cpp
+ * @author Toshiki Nakamura
+ * @brief Convert a sensor_msgs/LaserScan to a sensor_msgs/PointCloud
+ * @copyright Copyright (c) 2024
+ */
 
-typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
+#include <string>
 
-ScanToPcl::ScanToPcl():private_nh_("~")
+#include "scan_to_pcl_ros/scan_to_pcl_ros.h"
+
+ScanToPcl::ScanToPcl() : private_nh_("~")
 {
-    private_nh_.param<int>("hz", hz_, 10);
-    private_nh_.param<std::string>("frame_id", frame_id_, "base_link");
-    hokuyo_sub_ = nh_.subscribe("/scan", 1, &ScanToPcl::hokuyo_callback, this);
-    pcl_from_scan_pub_ = nh_.advertise<PointCloud>("/pcl_from_scan", 1);
+  private_nh_.param<int>("hz", hz_, 10);
+  private_nh_.param<std::string>("frame_id", frame_id_, "base_link");
+  hokuyo_sub_ = nh_.subscribe("/scan", 1, &ScanToPcl::hokuyo_callback, this);
+  pcl_from_scan_pub_ = nh_.advertise<pcl::PointCloud<pcl::PointXYZ>>("/pcl_from_scan", 1);
 }
 
-void ScanToPcl::hokuyo_callback(const sensor_msgs::LaserScan::ConstPtr& scan_in)
+void ScanToPcl::hokuyo_callback(const sensor_msgs::LaserScan::ConstPtr &scan_in)
 {
-    laser_geometry::LaserProjection projector;
-    sensor_msgs::PointCloud2 cloud;
-    projector.projectLaser(*scan_in, cloud); // convert a sensor_msgs/LaserScan to a sensor_msgs/PointCloud
+  laser_geometry::LaserProjection projector;
+  sensor_msgs::PointCloud2 cloud;
+  projector.projectLaser(*scan_in, cloud);  // convert a sensor_msgs/LaserScan to a sensor_msgs/PointCloud
 
-    // Publish the new point cloud.
-    cloud.header.frame_id = frame_id_;
-    cloud.header.stamp = scan_in->header.stamp;
-    pcl_from_scan_pub_.publish(cloud);
+  // Publish the new point cloud.
+  cloud.header.frame_id = frame_id_;
+  cloud.header.stamp = scan_in->header.stamp;
+  pcl_from_scan_pub_.publish(cloud);
 }
 
 void ScanToPcl::process()
 {
-    ros::Rate loop_rate(hz_);
+  ros::Rate loop_rate(hz_);
 
-    while(ros::ok())
-    {
-        ros::spinOnce();
-        loop_rate.sleep();
-    }
+  while (ros::ok())
+  {
+    ros::spinOnce();
+    loop_rate.sleep();
+  }
 }
