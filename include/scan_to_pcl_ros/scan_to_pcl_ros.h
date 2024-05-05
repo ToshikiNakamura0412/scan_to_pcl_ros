@@ -1,3 +1,10 @@
+/**
+ * @file scan_to_pcl_ros.hpp
+ * @author Toshiki Nakamura
+ * @brief Convert a sensor_msgs/LaserScan to a sensor_msgs/PointCloud
+ * @copyright Copyright (c) 2024
+ */
+
 #ifndef SCAN_TO_PCL_ROS_HPP
 #define SCAN_TO_PCL_ROS_HPP
 
