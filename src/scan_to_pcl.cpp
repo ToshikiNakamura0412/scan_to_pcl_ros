@@ -14,9 +14,16 @@
 #include <string>
 #include <tf/transform_listener.h>
 
+/**
+ * @class ScanToPcl
+ * @brief Class for converting a sensor_msgs/LaserScan to a sensor_msgs/PointCloud
+ */
 class ScanToPcl
 {
 public:
+  /**
+   * @brief Construct a new Scan To Pcl object
+   */
   ScanToPcl() : private_nh_("~")
   {
     private_nh_.param<std::string>("frame_id", frame_id_, std::string("base_scan"));
@@ -31,6 +38,12 @@ public:
   }
 
 private:
+  /**
+   * @brief Callback function for the subscriber
+   * @details Convert a sensor_msgs/LaserScan to a sensor_msgs/PointCloud
+   *
+   * @param msg Scan message
+   */
   void scan_callback(const sensor_msgs::LaserScan::ConstPtr &msg)
   {
     laser_geometry::LaserProjection projector;
