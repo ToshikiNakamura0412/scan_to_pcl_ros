@@ -29,7 +29,7 @@ public:
     private_nh_.param<std::string>("frame_id", frame_id_, std::string("base_scan"));
 
     cloud_pub_ = nh_.advertise<pcl::PointCloud<pcl::PointXYZ>>("/cloud", 1);
-    scan_sub_ = nh_.subscribe("/scan", 1, &ScanToPcl::scan_callback, this);
+    scan_sub_ = nh_.subscribe("/scan", 1, &ScanToPcl::laser_scan_callback, this);
 
     tf_listener_.setExtrapolationLimit(ros::Duration(0.1));
 
@@ -39,12 +39,12 @@ public:
 
 private:
   /**
-   * @brief Callback function for the subscriber
+   * @brief Callback function for the subscriber of the scan topic
    * @details Convert a sensor_msgs/LaserScan to a sensor_msgs/PointCloud
    *
-   * @param msg Scan message
+   * @param msg laser scan message
    */
-  void scan_callback(const sensor_msgs::LaserScan::ConstPtr &msg)
+  void laser_scan_callback(const sensor_msgs::LaserScan::ConstPtr &msg)
   {
     laser_geometry::LaserProjection projector;
     sensor_msgs::PointCloud2 cloud;
