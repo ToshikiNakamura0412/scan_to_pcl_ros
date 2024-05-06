@@ -24,7 +24,7 @@ public:
   /**
    * @brief Construct a new Scan To Pcl object
    */
-  ScanToPcl() : private_nh_("~")
+  ScanToPcl(void) : private_nh_("~")
   {
     private_nh_.param<std::string>("frame_id", frame_id_, std::string("base_scan"));
 
