@@ -73,4 +73,4 @@ TF (from the frame_id of scan to the frame_id of pcl) is required
   The frame id of converted point cloud
 
 ## References
-- https://github.com/amslabtech/motion_decision
+- https://github.com/ros-perception/pointcloud_to_laserscan
