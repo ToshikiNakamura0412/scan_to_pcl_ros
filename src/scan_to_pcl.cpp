@@ -29,7 +29,8 @@ public:
     private_nh_.param<std::string>("frame_id", frame_id_, std::string("base_scan"));
 
     cloud_pub_ = nh_.advertise<pcl::PointCloud<pcl::PointXYZ>>("/cloud", 1);
-    laser_scan_sub_ = nh_.subscribe("/scan", 1, &ScanToPcl::laser_scan_callback, this);
+    laser_scan_sub_ =
+        nh_.subscribe("/scan", 1, &ScanToPcl::laser_scan_callback, this, ros::TransportHints().reliable().tcpNoDelay());
 
     tf_listener_.setExtrapolationLimit(ros::Duration(0.1));
 
