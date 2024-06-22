@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="output" default="log" doc="screen or log"/>
     <arg name="frame_id" default="base_scan"/>
     <arg name="cloud_topic" default="/cloud"/>
-    <node pkg="scan_to_pcl_ros" type="scan_to_pcl_node" name="scan_to_pcl" output="screen">
+    <node pkg="scan_to_pcl_ros" type="scan_to_pcl_node" name="scan_to_pcl" output="$(arg output)">
         <param name="frame_id" value="$(arg frame_id)"/>
         <remap from="/cloud" to="$(arg cloud_topic)"/>
     </node>
