@@ -2,7 +2,9 @@
 <launch>
     <arg name="rviz_path" default="$(find scan_to_pcl_ros)/launch/rviz.rviz"/>
 
-    <include file="$(find scan_to_pcl_ros)/launch/scan_to_pcl.launch"/>
+    <include file="$(find scan_to_pcl_ros)/launch/scan_to_pcl.launch">
+        <arg name="output" value="screen"/>
+    </include>
 
     <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rviz_path)"/>
