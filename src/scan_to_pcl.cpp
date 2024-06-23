@@ -6,8 +6,6 @@
  */
 
 #include <laser_geometry/laser_geometry.h>
-#include <pcl_conversions/pcl_conversions.h>
-#include <pcl_ros/point_cloud.h>
 #include <ros/ros.h>
 #include <sensor_msgs/LaserScan.h>
 #include <sensor_msgs/PointCloud2.h>
@@ -28,11 +26,9 @@ public:
   {
     private_nh_.param<std::string>("frame_id", frame_id_, std::string("base_scan"));
 
-    cloud_pub_ = nh_.advertise<pcl::PointCloud<pcl::PointXYZ>>("/cloud", 1);
+    cloud_pub_ = nh_.advertise<sensor_msgs::PointCloud2>("/cloud", 1);
     laser_scan_sub_ =
         nh_.subscribe("/scan", 1, &ScanToPcl::laser_scan_callback, this, ros::TransportHints().reliable().tcpNoDelay());
-
-    tf_listener_.setExtrapolationLimit(ros::Duration(0.1));
 
     ROS_INFO_STREAM(ros::this_node::getName() << " node has started..");
     ROS_INFO_STREAM("frame_id: " << frame_id_);
