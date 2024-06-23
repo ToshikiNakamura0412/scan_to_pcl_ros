@@ -5,10 +5,9 @@ add_compile_options(-std=c++17 -O2 -g)
 
 find_package(catkin REQUIRED COMPONENTS
   laser_geometry
-  pcl_conversions
-  pcl_ros
   roscpp
   sensor_msgs
+  tf
 )
 
 ###################################
@@ -19,7 +18,7 @@ catkin_package()
 ###########
 ## Build ##
 ###########
-include_directories(include ${catkin_INCLUDE_DIRS})
+include_directories(${catkin_INCLUDE_DIRS})
 
 add_executable(scan_to_pcl_node src/scan_to_pcl.cpp)
 target_link_libraries(scan_to_pcl_node ${catkin_LIBRARIES})
